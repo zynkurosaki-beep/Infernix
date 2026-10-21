@@ -14,7 +14,7 @@ Infernix checks this repository each time it starts, and again when you press
 **Settings > Updates > Check now**.
 
 1. The app reads the tag of the latest release, for example `v1.5.1`.
-2. If that tag does not match the version you have installed, an **Upgrade** button appears.
+2. If that tag is newer than the version you have installed, an **Upgrade** button appears.
 3. Press **Upgrade**. The app downloads the installer from the release and shows its progress.
 4. Infernix closes, installs the new version silently, and opens again on its own.
 

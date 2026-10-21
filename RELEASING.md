@@ -12,7 +12,7 @@ Follow these rules, or the update check skips the release.
 5. Attach `Infernix Setup 1.5.1.exe` as a release asset.
 6. Write the notes and press **Publish release**.
 
-Installs of any other version now show **Upgrade** on their next start.
+Installs of any older version now show **Upgrade** on their next start.
 
 ## Rules the updater checks
 
@@ -21,10 +21,11 @@ Installs of any other version now show **Upgrade** on their next start.
 | Tag is exactly `vX.X.X`, such as `v1.5.1` | Tags like `1.5.1`, `v1.5`, or `v1.5.1-beta` are ignored. |
 | Release is published, not a draft or pre-release | The app reads only `releases/latest`, which skips both. |
 | At least one `.exe` asset is attached | Without one, no Upgrade appears. An asset with `Setup` in its name is preferred. |
-| The tag matches `package.json` of the build you attach | Otherwise the new install sees a mismatch and offers the same upgrade forever. |
+| The tag matches `package.json` of the build you attach | Otherwise the new install still sees itself as older and offers the same upgrade forever. |
+| The tag is newer than the last one | Installs only move up. A tag older than the installed version is ignored. |
 
 ## Rolling back
 
-The updater offers whatever the latest release is, even if it is older than the installed version.
-To roll back, publish the older build again as a new latest release, or delete the bad release.
-The release marked **Latest** is the one every install moves to.
+Installs never move to an older version. To undo a bad release, rebuild the good code with a
+higher version number (for example `1.5.4` with the `1.5.2` code) and publish that.
+Deleting the bad release stops new upgrades to it, but installs that already have it stay on it.
